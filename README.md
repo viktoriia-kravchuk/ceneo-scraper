@@ -22,5 +22,9 @@
 ## Etap 3 - pobranie wszystkich opinii o pojedynczym produkcie 
 -przechodzenie po stronie z opiniami
 -eksport opinii do pilku(.csv, .xlsx, .json)
+## Etap 4 
+-transformacja danych
+-refaktoryzacja kodu
+
 
 
