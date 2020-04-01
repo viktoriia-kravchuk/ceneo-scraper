@@ -1,0 +1,44 @@
+[
+    {
+        "recommendation": "Polecam",
+        "stars": "5/5",
+        "content": "Bardzo fajny i wygodny produkt.",
+        "author": "Użytkownik Ceneo",
+        "pros": null,
+        "cons": null,
+        "useful": "0",
+        "useless": "0",
+        "purchased": true,
+        "opinion_id": "11846640",
+        "review_date": "2020-03-04 15:20:57",
+        "purchase_date": "2020-02-27 08:53:50"
+    },
+    {
+        "recommendation": "Polecam",
+        "stars": "5/5",
+        "content": "B.ok.",
+        "author": "Krzysztof",
+        "pros": null,
+        "cons": null,
+        "useful": "0",
+        "useless": "0",
+        "purchased": true,
+        "opinion_id": "12025207",
+        "review_date": "2020-03-31 12:24:32",
+        "purchase_date": "2020-02-29 15:52:31"
+    },
+    {
+        "recommendation": "Polecam",
+        "stars": "5/5",
+        "content": "5/5",
+        "author": "Użytkownik Ceneo",
+        "pros": null,
+        "cons": null,
+        "useful": "0",
+        "useless": "0",
+        "purchased": true,
+        "opinion_id": "11919378",
+        "review_date": "2020-03-16 21:16:49",
+        "purchase_date": "2020-02-25 20:03:49"
+    }
+]
