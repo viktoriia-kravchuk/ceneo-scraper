@@ -31,24 +31,24 @@
 - wykonanie prostych wykresów na podstawie danych w ramce
 ## Etap 6 - przygotowanie interfajsu webowego aplikacji (Flask)
 -struktura aplikacji
-    /CeneoScraper  
-        /run.py  
-        /config.py  
-        /app  
-            /__init__.py
-            /views.py  
-            /models.py  
-            /scraper.py
-            /analyzer.py
-            /opinions_json
-            /static/  
-                /figures_png
-                /main.css
-            /templates/  
-                /layout.html  
-        /requirements.txt  
-        /README.txt
-        /yourappenv
+>    /CeneoScraper  
+>>        /run.py  
+>>        /config.py  
+>>        /app  
+>>>            /\_\_init\_\_.py
+>>>            /views.py  
+>>>            /models.py  
+>>>            /scraper.py
+>>>            /analyzer.py
+>>>            /opinions_json
+>>>            /static/  
+>>>>                /figures_png
+>>>>                /main.css
+>>>            /templates/  
+>>>>                /layout.html  
+>>>        /requirements.txt  
+>>>        /README.txt
+>>>        /.venv/
 
 -widoki (Jinja)
 -routingi
