@@ -1,17 +1,30 @@
 import textwrap
 import requests
-from app import app
+import json
 from bs4 import BeautifulSoup
+#from app import app
+#from app.utils import extract_element, remove_whitespaces
 from utils import extract_element, remove_whitespaces
+
 class Product:
     def __init__(self,product_id=None,name=None,opinions=[]):
         self.product_id=product_id
         self.name=name
         self.opinions=opinions
+
     def __str__(self):
-        return f"Product id:{self.product_id}\nName: {self.name}\nOpinions:\n"+"\n".join(textwrap.indent(str(opinion), "    ") for opinion in self.opinions)
-    def __repr__(self):
-        pass    
+        return f'Product id: {self.product_id}\nName: {self.name}\nOpinions:\n'+"\n".join(textwrap.indent(str(opinion),"    ") for opinion in self.opinions)
+    
+
+    def __dict__(self):
+        return {
+            "product_id": self.product_id,
+            "name": self.name,
+            "opinions": [opinion.__dict__() for opinion in self.opinions]
+        }
+       
+
+
     def extract_product(self):
         url_prefix = "https://www.ceneo.pl"
         url_postfix = "#tab=reviews"
@@ -38,7 +51,7 @@ class Product:
                 except TypeError:
                     url = None
     def save_product(self):
-        with open("./opinions_json/"+self.product_id+'.json', 'w', encoding="utf-8") as fp:
+        with open("app/opinions_json/"+self.product_id+'.json', 'w', encoding="utf-8") as fp:
             json.dump(self.opinions, fp, ensure_ascii=False, indent=4, separators=(',', ': '))
 
 class Opinion:
@@ -68,7 +81,16 @@ class Opinion:
         self.purchase_date=purchase_date
         self.review_date=review_date
     def _str_(self):
-        return f"Opinion id: {self.opinion}\nAuthor: {self.author}\nStars: {self.stars}\nZalety: {self.pros}\nWady: {self.cons}"
+        return '\n'.join(key+': '+('' if getattr(self,key) is None else getattr(self,key)) for key in self.__dict__().keys())
+    def __dict__(self):
+            features = {key:('' if getattr(self,key) is None else getattr(self,key))
+                        for key in self.tags.keys()}
+            features['opinion_id'] = self.opinion_id
+            features['pros'] = self.pros
+            features['cons'] = self.cons
+            features['review_date'] = self.review_date
+            features['purchase_date'] = self.purchase_date
+            return features
 
      
     def extract_opinion(self, opinion):
