@@ -2,9 +2,9 @@ import textwrap
 import requests
 import json
 from bs4 import BeautifulSoup
-#from app import app
-#from app.utils import extract_element, remove_whitespaces
-from utils import extract_element, remove_whitespaces
+from app import app
+from app.utils import extract_element, remove_whitespaces
+#from utils import extract_element, remove_whitespaces
 
 class Product:
     def __init__(self,product_id=None,name=None,opinions=[]):
@@ -52,7 +52,17 @@ class Product:
                     url = None
     def save_product(self):
         with open("app/opinions_json/"+self.product_id+'.json', 'w', encoding="utf-8") as fp:
-            json.dump(self.opinions, fp, ensure_ascii=False, indent=4, separators=(',', ': '))
+            json.dump(self.__dict__(), fp, ensure_ascii=False, indent=4, separators=(',', ': '))
+
+    def read_product(self):
+        with open("app/opinions_json/"+self.product_id+'.json', 'r', encoding="utf-8") as fp:
+            pr = json.load(fp)
+        self.name=pr["name"]    
+        opinions=pr["opinions"]
+        for opinion in opinions:
+            op=Opinion(**opinion)
+            self.opinions.append(op)
+
 
 class Opinion:
     #słownik z składowymi opinii i ich selektorami
@@ -82,6 +92,7 @@ class Opinion:
         self.review_date=review_date
     def _str_(self):
         return '\n'.join(key+': '+('' if getattr(self,key) is None else getattr(self,key)) for key in self.__dict__().keys())
+
     def __dict__(self):
             features = {key:('' if getattr(self,key) is None else getattr(self,key))
                         for key in self.tags.keys()}
