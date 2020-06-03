@@ -5,6 +5,7 @@ from app.forms import ProductForm
 from app.models import Opinion, Product
 import requests
 import pandas as pd
+import os
 Markdown(app)
 
 app.config["SECRET_KEY"]="TajemniczyMysiSprzęt"
@@ -28,7 +29,8 @@ def extract():
         product_id=form.product_id.data
         page_respons = requests.get("https://www.ceneo.pl/"+product_id)
         if page_respons.status_code == requests.codes['ok']:
-            
+            product=Product(product_id)
+            product.extract_product()
             product.save_product()
             return redirect(url_for("product", id=product_id))
         else:
@@ -50,5 +52,8 @@ def product(id):
 
 @app.route('/products')
 def products():
-    pass
+    products=os.listdir("app/opinions_json")
+    products=[product.replace(".json","") for product in products]
+    return render_template("products.html",products=products)
+ 
 
